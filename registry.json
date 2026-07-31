@@ -135,6 +135,71 @@
           "border-bottom": "1px solid var(--border)"
         }
       }
+    },
+    {
+      "name": "app-theme",
+      "type": "registry:item",
+      "title": "Crowdin App Theme",
+      "description": "Opt-in bridge for apps embedded in the Crowdin iframe: re-points the Crowdin theme tokens at the host --crowdin-* variables, keeping the canonical values as fallbacks for local development.",
+      "registryDependencies": ["@crowdin/theme"],
+      "css": {
+        ":root:root": {
+          "--background": "var(--crowdin-level-2-bg, oklch(1 0 0))",
+          "--foreground": "var(--crowdin-body-color, rgba(38, 50, 56, 0.87))",
+          "--card": "var(--crowdin-level-3-bg, oklch(1 0 0))",
+          "--card-foreground": "var(--crowdin-body-color, rgba(38, 50, 56, 0.87))",
+          "--popover": "var(--crowdin-level-3-bg, oklch(1 0 0))",
+          "--popover-foreground": "var(--crowdin-body-color, rgba(38, 50, 56, 0.87))",
+          "--primary": "var(--crowdin-primary, oklch(0.268 0.022 230))",
+          "--primary-foreground": "var(--crowdin-primary-btn-color, oklch(1 0 0))",
+          "--secondary": "var(--crowdin-gray-01, rgba(38, 50, 56, 0.1))",
+          "--secondary-foreground": "var(--crowdin-body-color, rgba(38, 50, 56, 0.87))",
+          "--muted": "var(--crowdin-gray-005, rgba(38, 50, 56, 0.05))",
+          "--muted-foreground": "var(--crowdin-text-muted, rgba(38, 50, 56, 0.54))",
+          "--accent": "var(--crowdin-gray-005, rgba(38, 50, 56, 0.05))",
+          "--accent-foreground": "var(--crowdin-body-color, rgba(38, 50, 56, 0.87))",
+          "--destructive": "var(--crowdin-danger, #dc5242)",
+          "--border": "var(--crowdin-border-color, oklch(0.91 0.006 228))",
+          "--input": "var(--crowdin-border-color, oklch(0.91 0.006 228))",
+          "--ring": "var(--crowdin-primary, oklch(0.268 0.022 230))",
+          "--sidebar": "var(--crowdin-level-0-bg, #f5f7f8)",
+          "--sidebar-foreground": "var(--crowdin-body-color, rgba(38, 50, 56, 0.87))",
+          "--sidebar-primary": "var(--crowdin-primary, oklch(0.268 0.022 230))",
+          "--sidebar-primary-foreground": "var(--crowdin-primary-btn-color, oklch(1 0 0))",
+          "--sidebar-accent": "var(--crowdin-gray-005, rgba(38, 50, 56, 0.05))",
+          "--sidebar-accent-foreground": "var(--crowdin-body-color, rgba(38, 50, 56, 0.87))",
+          "--sidebar-border": "var(--crowdin-border-color, oklch(0.91 0.006 228))",
+          "--sidebar-ring": "var(--crowdin-primary, oklch(0.268 0.022 230))"
+        },
+        ":root:root.dark": {
+          "--background": "var(--crowdin-level-2-bg, #2c3139)",
+          "--foreground": "var(--crowdin-body-color, oklch(1 0 0))",
+          "--card": "var(--crowdin-level-3-bg, #373e48)",
+          "--card-foreground": "var(--crowdin-body-color, oklch(1 0 0))",
+          "--popover": "var(--crowdin-level-3-bg, #373e48)",
+          "--popover-foreground": "var(--crowdin-body-color, oklch(1 0 0))",
+          "--primary": "var(--crowdin-primary, oklch(0.636 0.165 142.5))",
+          "--primary-foreground": "var(--crowdin-primary-btn-color, oklch(1 0 0))",
+          "--secondary": "var(--crowdin-gray-01, rgba(255, 255, 255, 0.1))",
+          "--secondary-foreground": "var(--crowdin-body-color, oklch(1 0 0))",
+          "--muted": "var(--crowdin-gray-005, rgba(255, 255, 255, 0.05))",
+          "--muted-foreground": "var(--crowdin-text-muted, oklch(0.644 0.009 248))",
+          "--accent": "var(--crowdin-gray-005, rgba(255, 255, 255, 0.05))",
+          "--accent-foreground": "var(--crowdin-body-color, oklch(1 0 0))",
+          "--destructive": "var(--crowdin-danger, oklch(0.704 0.191 22.216))",
+          "--border": "var(--crowdin-border-color, oklch(1 0 0 / 10%))",
+          "--input": "var(--crowdin-border-color, oklch(1 0 0 / 10%))",
+          "--ring": "var(--crowdin-primary, oklch(0.636 0.165 142.5))",
+          "--sidebar": "var(--crowdin-level-0-bg, #16191d)",
+          "--sidebar-foreground": "var(--crowdin-body-color, oklch(1 0 0))",
+          "--sidebar-primary": "var(--crowdin-primary, oklch(0.636 0.165 142.5))",
+          "--sidebar-primary-foreground": "var(--crowdin-primary-btn-color, oklch(1 0 0))",
+          "--sidebar-accent": "var(--crowdin-gray-005, rgba(255, 255, 255, 0.05))",
+          "--sidebar-accent-foreground": "var(--crowdin-body-color, oklch(1 0 0))",
+          "--sidebar-border": "var(--crowdin-border-color, oklch(1 0 0 / 10%))",
+          "--sidebar-ring": "var(--crowdin-primary, oklch(0.636 0.165 142.5))"
+        }
+      }
     }
   ]
 }
