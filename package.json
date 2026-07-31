@@ -1,0 +1,27 @@
+{
+  "name": "@crowdin/ui-registry",
+  "private": true,
+  "description": "Crowdin shadcn registry: Crowdin theme tokens and a curated mirror of shadcn/ui components.",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Andrii Bodnar",
+    "url": "https://github.com/andrii-bodnar/"
+  },
+  "scripts": {
+    "test": "node --test",
+    "sync": "node scripts/sync-upstream.mjs",
+    "build": "shadcn build --output r",
+    "validate": "shadcn registry validate ./registry.json",
+    "smoke": "node scripts/smoke.mjs",
+    "site:dev": "pnpm --dir site dev",
+    "site:build": "pnpm --dir site build"
+  },
+  "devDependencies": {
+    "shadcn": "4.16.1"
+  },
+  "packageManager": "pnpm@11.5.2",
+  "engines": {
+    "node": "^22.19 || ^24"
+  }
+}

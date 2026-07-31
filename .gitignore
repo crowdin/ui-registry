@@ -1,0 +1,5 @@
+node_modules/
+r/
+.DS_Store
+site/dist/
+site/src/generated/
