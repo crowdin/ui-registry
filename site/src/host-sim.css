@@ -1,0 +1,72 @@
+/* Host palettes for the "Simulate host" control: the --crowdin-* variables
+   crowdin.com and Crowdin Enterprise inject into app iframes, as of
+   2026-08-06. Only the variables the app-theme bridge reads are simulated,
+   plus the *-color RGB triplets their formulas resolve through (kept as the
+   same var() chains the hosts use).
+
+   Notable host differences:
+   - crowdin.com does NOT send --crowdin-primary in light mode - apps
+     intentionally fall back to the canonical navy. Dark sends Crowdin green.
+   - Enterprise sends --crowdin-primary in both modes, derived from the
+     org-brandable --crowdin-primaries-color triplet (default Crowdin green).
+   - danger differs in dark mode: #fd413c (com) vs #fa644a (enterprise). */
+
+[data-crowdin-host="com"] {
+  --crowdin-cards-color: 38, 50, 56;
+  --crowdin-level-0-bg: #f5f7f8;
+  --crowdin-level-2-bg: #ffffff;
+  --crowdin-level-3-bg: #ffffff;
+  --crowdin-body-color: rgba(38, 50, 56, 0.87);
+  --crowdin-primary-btn-color: #ffffff;
+  --crowdin-gray-01: rgba(var(--crowdin-cards-color), 0.1);
+  --crowdin-gray-005: rgba(var(--crowdin-cards-color), 0.05);
+  --crowdin-text-muted: rgba(38, 50, 56, 0.54);
+  --crowdin-danger: #dc5242;
+  --crowdin-border-color: rgba(38, 50, 56, 0.1);
+}
+
+[data-crowdin-host="com"].dark {
+  --crowdin-cards-color: 255, 255, 255;
+  --crowdin-level-0-bg: #16191d;
+  --crowdin-level-2-bg: #2c3139;
+  --crowdin-level-3-bg: #373e48;
+  --crowdin-body-color: #bdc1c6;
+  --crowdin-primary: #57bc5c;
+  --crowdin-primary-btn-color: #ffffff;
+  --crowdin-text-muted: #949aa3;
+  --crowdin-danger: #fd413c;
+  --crowdin-border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-crowdin-host="enterprise"] {
+  --crowdin-primaries-color: 67, 160, 71;
+  --crowdin-typeface-color: 38, 50, 56;
+  --crowdin-cards-color: 38, 50, 56;
+  --crowdin-whites: 255, 255, 255;
+  --crowdin-white: rgba(var(--crowdin-whites), 1);
+  --crowdin-level-1-bg: #f5f7f8;
+  --crowdin-level-0-bg: var(--crowdin-level-1-bg);
+  --crowdin-level-2-bg: var(--crowdin-white);
+  --crowdin-level-3-bg: var(--crowdin-level-2-bg);
+  --crowdin-body-color: rgba(var(--crowdin-typeface-color), 0.87);
+  --crowdin-primary: rgba(var(--crowdin-primaries-color), 1);
+  --crowdin-primary-btn-color: var(--crowdin-white);
+  --crowdin-gray-01: rgba(var(--crowdin-cards-color), 0.1);
+  --crowdin-gray-005: rgba(var(--crowdin-cards-color), 0.05);
+  --crowdin-gray-012: rgba(var(--crowdin-cards-color), 0.12);
+  --crowdin-text-muted: rgba(var(--crowdin-typeface-color), 0.54);
+  --crowdin-danger: #dc5242;
+  --crowdin-border-color: var(--crowdin-gray-012);
+}
+
+[data-crowdin-host="enterprise"].dark {
+  --crowdin-primaries-color: 78, 183, 83;
+  --crowdin-typeface-color: 255, 255, 255;
+  --crowdin-cards-color: 255, 255, 255;
+  --crowdin-level-0-bg: #16191d;
+  --crowdin-level-1-bg: #21252b;
+  --crowdin-level-2-bg: #2c3139;
+  --crowdin-level-3-bg: #373e48;
+  --crowdin-danger: #fa644a;
+  --crowdin-border-color: var(--crowdin-gray-01);
+}

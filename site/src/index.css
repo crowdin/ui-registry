@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@source "../../registry/src";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "./generated/theme.css";
+@import "./host-sim.css";
+
+@custom-variant dark (&:is(.dark *));

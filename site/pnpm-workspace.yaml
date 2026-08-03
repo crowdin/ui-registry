@@ -1,0 +1,6 @@
+# Marks site/ as its own pnpm workspace root so installs stay standalone
+# (otherwise pnpm walks up and installs into the repo root workspace).
+# esbuild's install script is denied: it ships prebuilt platform binaries
+# via optional dependencies, so the script is not needed.
+allowBuilds:
+  esbuild: false
