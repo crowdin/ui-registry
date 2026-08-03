@@ -1,0 +1,3 @@
+# pnpm 11 blocks unapproved install scripts; explicitly deny @parcel/watcher's native build (prebuilds suffice, smoke never watches files).
+allowBuilds:
+  "@parcel/watcher": false
