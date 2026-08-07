@@ -57,17 +57,30 @@ await run(["install"]);
 const index = JSON.parse(readFileSync(join(rDir, "registry.json"), "utf8"));
 const names = index.items.map((item) => `@crowdin/${item.name}`);
 await run(["exec", "shadcn", "add", ...names, "--yes", "--overwrite"]);
+
+// The app-theme bridge sources must actually land in the fixture - if the
+// CLI skipped a registry:item's files, tsc below would still pass vacuously.
+for (const file of ["src/lib/crowdin-host.ts", "src/hooks/use-crowdin-theme.ts"]) {
+  if (!existsSync(join(dir, file))) {
+    console.error(`app-theme bridge file missing after install: ${file}`);
+    process.exit(1);
+  }
+}
+
 await run(["exec", "tsc", "--noEmit"]);
 
 // Re-adding a component re-applies @crowdin/theme into :root; the app-theme
-// bridge lives under :root:root and must survive untouched.
+// bridge lives under :root:root and must survive untouched. The expected
+// declarations come from the source registry so value updates stay in sync.
 await run(["exec", "shadcn", "add", "@crowdin/button", "--yes", "--overwrite"]);
+const source = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
+const bridgeCss = source.items.find((item) => item.name === "app-theme").css;
 const indexCss = await readFile(join(dir, "src/index.css"), "utf8");
 for (const snippet of [
   ":root:root",
   ":root:root.dark",
-  "--background: var(--crowdin-level-2-bg, oklch(1 0 0))",
-  "--background: var(--crowdin-level-2-bg, #2c3139)",
+  `--background: ${bridgeCss[":root:root"]["--background"]}`,
+  `--background: ${bridgeCss[":root:root.dark"]["--background"]}`,
   "@apply border-border outline-ring/50",
   "@apply bg-background text-foreground",
 ]) {

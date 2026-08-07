@@ -86,22 +86,18 @@ test("bridge values read a host variable with the canonical fallback", () => {
   }
 });
 
-test("tokens sharing a host variable share one fallback per mode", () => {
-  for (const { selector } of MODES) {
-    const byHostVar = new Map();
-    for (const [prop, value] of Object.entries(bridge.css[selector])) {
-      const [, hostVar, fallback] = value.match(BRIDGE_VALUE);
-      const seen = byHostVar.get(hostVar);
-      if (seen !== undefined) {
-        assert.equal(
-          fallback,
-          seen,
-          `${selector}: ${hostVar} maps to two different fallbacks (${prop})`,
-        );
-      }
-      byHostVar.set(hostVar, fallback);
-    }
-  }
+// Note: tokens sharing a host variable do NOT always share a fallback - the
+// apps SDK theme (the ground truth) gives --crowdin-level-2-bg different
+// fallbacks for background vs popover in dark mode, and --crowdin-gray-005
+// different fallbacks for muted vs accent in light mode. Inside the host all
+// aliases of a variable resolve identically; only local-dev fallbacks differ.
+// The per-token "fallback equals the theme value" test above is the invariant.
+
+test("app-theme ships the host bridge sources", () => {
+  assert.deepEqual(bridge.files, [
+    { path: "registry/crowdin/crowdin-host.ts", type: "registry:lib" },
+    { path: "registry/crowdin/use-crowdin-theme.ts", type: "registry:hook" },
+  ]);
 });
 
 test("each token reads the same host variable in both modes", () => {
@@ -117,7 +113,7 @@ const HOST_VAR_BY_TOKEN = {
   "foreground": "--crowdin-body-color",
   "card": "--crowdin-level-3-bg",
   "card-foreground": "--crowdin-body-color",
-  "popover": "--crowdin-level-3-bg",
+  "popover": "--crowdin-level-2-bg",
   "popover-foreground": "--crowdin-body-color",
   "primary": "--crowdin-primary",
   "primary-foreground": "--crowdin-primary-btn-color",
