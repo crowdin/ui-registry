@@ -1,6 +1,6 @@
 {
   "host": "enterprise",
-  "source": "../enterprise-frontend/public/css-variables.js",
+  "source": "window.cssVariables on Crowdin Enterprise (redesign v2) - the map AP.getCssVariables delivers to app iframes",
   "capturedAt": "2026-10-14",
   "light": {
     "--color-gray-800": "#262626",

@@ -151,7 +151,7 @@ test("each token reads its canonical host variable", () => {
 });
 
 // tests/hosts/*.json pin what each Crowdin host actually sends to app iframes
-// (captured by scripts/capture-host-vars.mjs). They are the ground truth for
+// (copied from the host's window.cssVariables, see README). They are the ground truth for
 // the host variable names the bridge may read and for the canonical values.
 const hosts = readdirSync(new URL("../tests/hosts/", import.meta.url))
   .filter((file) => file.endsWith(".json"))

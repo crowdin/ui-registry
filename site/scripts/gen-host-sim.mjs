@@ -2,8 +2,8 @@ import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 // Host palettes for the "Simulate host" control: exactly the variables each
-// Crowdin host sends to app iframes (tests/hosts/*.json, captured by
-// scripts/capture-host-vars.mjs), applied on <html> the way the app-theme
+// Crowdin host sends to app iframes (tests/hosts/*.json, see README),
+// applied on <html> the way the app-theme
 // bridge applies them - var() chains included, so they resolve like in the host.
 export function generateHostSimCss(hosts) {
   const decls = (vars) =>

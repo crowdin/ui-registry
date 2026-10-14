@@ -1,6 +1,6 @@
 {
   "host": "crowdin-com",
-  "source": "../frontend/www/js/css-variables.js",
+  "source": "window.cssVariables on crowdin.com - the map AP.getCssVariables delivers to app iframes",
   "capturedAt": "2026-10-14",
   "light": {
     "--crowdin-body-color": "rgba(38, 38, 38, 0.87)",

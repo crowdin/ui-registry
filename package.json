@@ -14,7 +14,6 @@
     "build": "shadcn build --output r",
     "validate": "shadcn registry validate ./registry.json",
     "smoke": "node scripts/smoke.mjs",
-    "capture-host": "node scripts/capture-host-vars.mjs",
     "site:dev": "pnpm --dir site dev",
     "site:build": "pnpm --dir site build"
   },

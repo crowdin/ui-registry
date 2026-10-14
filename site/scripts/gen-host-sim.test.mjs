@@ -5,14 +5,14 @@ import { generateHostSimCss } from "./gen-host-sim.mjs";
 const hosts = [
   {
     host: "crowdin-com",
-    source: "../frontend/www/js/css-variables.js",
+    source: "window.cssVariables on crowdin.com",
     capturedAt: "2026-10-14",
     light: { "--crowdin-primary": "#262626", "--crowdin-level-2-bg": "#ffffff" },
     dark: { "--crowdin-primary": "#f4f4f4", "--crowdin-level-2-bg": "#1c1c1c" },
   },
   {
     host: "enterprise",
-    source: "../enterprise-frontend/public/css-variables.js",
+    source: "window.cssVariables on Crowdin Enterprise",
     capturedAt: "2026-10-14",
     light: { "--color-gray-800": "#262626", "--crowdin-primary": "var(--color-gray-800)" },
     dark: { "--color-gray-100": "#f4f4f4", "--crowdin-primary": "var(--color-gray-100)" },
@@ -38,5 +38,5 @@ test("declares each captured variable verbatim, var() chains included", () => {
 test("records where each palette came from and warns against editing", () => {
   const css = generateHostSimCss(hosts);
   assert.ok(css.startsWith("/* generated from tests/hosts/*.json"));
-  assert.ok(css.includes("/* crowdin-com: ../frontend/www/js/css-variables.js, captured 2026-10-14 */"));
+  assert.ok(css.includes("/* crowdin-com: window.cssVariables on crowdin.com, captured 2026-10-14 */"));
 });
