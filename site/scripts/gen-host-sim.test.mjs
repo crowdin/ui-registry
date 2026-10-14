@@ -19,11 +19,14 @@ const hosts = [
   },
 ];
 
-test("emits a light and a dark block per host, keyed by data-crowdin-host", () => {
+// The light block must not also apply under .dark, or dark mode would get the
+// union of both maps instead of exactly what the host sends in dark mode.
+test("emits a light block that excludes .dark and a dark block per host", () => {
   const css = generateHostSimCss(hosts);
   for (const host of ["crowdin-com", "enterprise"]) {
-    assert.ok(css.includes(`[data-crowdin-host="${host}"] {`), `${host} light block`);
+    assert.ok(css.includes(`[data-crowdin-host="${host}"]:not(.dark) {`), `${host} light block`);
     assert.ok(css.includes(`[data-crowdin-host="${host}"].dark {`), `${host} dark block`);
+    assert.ok(!css.includes(`[data-crowdin-host="${host}"] {`), `${host} light block leaks into dark`);
   }
 });
 

@@ -14,7 +14,7 @@ export function generateHostSimCss(hosts) {
     "/* generated from tests/hosts/*.json by scripts/gen-host-sim.mjs - do not edit */",
     ...hosts.flatMap((host) => [
       `/* ${host.host}: ${host.source}, captured ${host.capturedAt} */`,
-      `[data-crowdin-host="${host.host}"] {\n${decls(host.light)}\n}`,
+      `[data-crowdin-host="${host.host}"]:not(.dark) {\n${decls(host.light)}\n}`,
       `[data-crowdin-host="${host.host}"].dark {\n${decls(host.dark)}\n}`,
     ]),
     "",
