@@ -6,6 +6,7 @@ import { generateThemeCss } from "./gen-theme.mjs";
 const registry = JSON.parse(
   readFileSync(new URL("../../registry.json", import.meta.url), "utf8"),
 );
+const bridge = registry.items.find((item) => item.name === "app-theme").css;
 
 test("generated css contains mappings, token blocks, style and bridge css", () => {
   const css = generateThemeCss(registry);
@@ -20,7 +21,8 @@ test("generated css contains mappings, token blocks, style and bridge css", () =
     "scrollbar-color: color-mix(in oklch, var(--muted-foreground) 30%, transparent) transparent;",
     ":root:root {",
     ":root:root.dark {",
-    "--background: var(--crowdin-level-2-bg, oklch(1 0 0));",
+    `--background: ${bridge[":root:root"]["--background"]};`,
+    `--background: ${bridge[":root:root.dark"]["--background"]};`,
     "@layer base {",
     "@apply border-border outline-ring/50;",
     "@apply bg-background text-foreground;",

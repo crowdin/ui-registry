@@ -7,9 +7,9 @@
     "url": "https://github.com/andrii-bodnar/"
   },
   "scripts": {
-    "predev": "node scripts/gen-theme.mjs",
+    "predev": "node scripts/gen-theme.mjs && node scripts/gen-host-sim.mjs",
     "dev": "vite",
-    "prebuild": "node scripts/gen-theme.mjs",
+    "prebuild": "node scripts/gen-theme.mjs && node scripts/gen-host-sim.mjs",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview"
   },

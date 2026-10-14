@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { test } from "node:test";
 
 const registry = JSON.parse(
@@ -116,7 +116,7 @@ const HOST_VAR_BY_TOKEN = {
   "popover": "--crowdin-level-2-bg",
   "popover-foreground": "--crowdin-body-color",
   "primary": "--crowdin-primary",
-  "primary-foreground": "--crowdin-primary-btn-color",
+  "primary-foreground": "--crowdin-primary-foreground",
   "secondary": "--crowdin-gray-01",
   "secondary-foreground": "--crowdin-body-color",
   "muted": "--crowdin-gray-005",
@@ -130,7 +130,7 @@ const HOST_VAR_BY_TOKEN = {
   "sidebar": "--crowdin-level-0-bg",
   "sidebar-foreground": "--crowdin-body-color",
   "sidebar-primary": "--crowdin-primary",
-  "sidebar-primary-foreground": "--crowdin-primary-btn-color",
+  "sidebar-primary-foreground": "--crowdin-primary-foreground",
   "sidebar-accent": "--crowdin-gray-005",
   "sidebar-accent-foreground": "--crowdin-body-color",
   "sidebar-border": "--crowdin-border-color",
@@ -145,6 +145,58 @@ test("each token reads its canonical host variable", () => {
         hostVar,
         HOST_VAR_BY_TOKEN[prop.replace(/^--/, "")],
         `${selector} ${prop} reads the wrong host variable`,
+      );
+    }
+  }
+});
+
+// tests/hosts/*.json pin what each Crowdin host actually sends to app iframes
+// (captured by scripts/capture-host-vars.mjs). They are the ground truth for
+// the host variable names the bridge may read and for the canonical values.
+const hosts = readdirSync(new URL("../tests/hosts/", import.meta.url))
+  .filter((file) => file.endsWith(".json"))
+  .map((file) =>
+    JSON.parse(readFileSync(new URL(`../tests/hosts/${file}`, import.meta.url), "utf8")),
+  );
+
+test("every captured host sends every host variable the bridge reads", () => {
+  assert.ok(hosts.length > 0, "no host fixtures in tests/hosts/");
+  const hostVars = new Set(Object.values(HOST_VAR_BY_TOKEN));
+  for (const host of hosts) {
+    for (const mode of ["light", "dark"]) {
+      for (const hostVar of hostVars) {
+        assert.ok(
+          hostVar in host[mode],
+          `${host.host} (${mode}) does not send ${hostVar}`,
+        );
+      }
+    }
+  }
+});
+
+// Resolves a value the way the app sees it: the bridge applies the host's
+// --crowdin-*/--color-* variables on <html>, so var() chains resolve through
+// the captured map; an unknown variable falls back like the browser would.
+function resolveHostValue(value, vars) {
+  const ref = /var\((--[a-zA-Z0-9_-]+)(?:,\s*([^()]*(?:\([^()]*\))*[^()]*))?\)/;
+  for (let match = value.match(ref), i = 0; match && i < 32; match = value.match(ref), i++) {
+    const [whole, name, fallback] = match;
+    value = value.replace(whole, name in vars ? vars[name] : (fallback ?? "<missing>"));
+  }
+  return value.trim();
+}
+
+// The theme literals (and so the bridge fallbacks) are the canonical Crowdin
+// values: exactly what crowdin.com sends for each token's host variable.
+test("theme literals equal the values crowdin.com sends", () => {
+  const com = hosts.find((host) => host.host === "crowdin-com");
+  assert.ok(com, "tests/hosts/crowdin-com.json is missing");
+  for (const { cssVars } of MODES) {
+    for (const [token, hostVar] of Object.entries(HOST_VAR_BY_TOKEN)) {
+      assert.equal(
+        theme.cssVars[cssVars][token],
+        resolveHostValue(`var(${hostVar})`, com[cssVars]),
+        `theme ${cssVars} ${token} drifted from crowdin.com ${hostVar}`,
       );
     }
   }

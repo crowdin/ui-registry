@@ -15,7 +15,7 @@ import { Forms } from "./sections/forms";
 import { Navigation } from "./sections/navigation";
 import { Overlays } from "./sections/overlays";
 
-type Host = "off" | "com" | "enterprise";
+type Host = "off" | "crowdin-com" | "enterprise";
 
 export function App() {
   const [dark, setDark] = useState(false);
@@ -57,7 +57,7 @@ export function App() {
                 onValueChange={(value) => setHost((value || "off") as Host)}
               >
                 <ToggleGroupItem value="off">Off</ToggleGroupItem>
-                <ToggleGroupItem value="com">crowdin.com</ToggleGroupItem>
+                <ToggleGroupItem value="crowdin-com">crowdin.com</ToggleGroupItem>
                 <ToggleGroupItem value="enterprise">Enterprise</ToggleGroupItem>
               </ToggleGroup>
             </div>
