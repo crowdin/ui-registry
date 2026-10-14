@@ -3,3 +3,6 @@ r/
 .DS_Store
 site/dist/
 site/src/generated/
+
+# JetBrains IDE settings
+.idea/

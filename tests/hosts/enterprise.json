@@ -1,0 +1,36 @@
+{
+  "host": "enterprise",
+  "source": "window.cssVariables on Crowdin Enterprise (redesign v2) - the map AP.getCssVariables delivers to app iframes",
+  "capturedAt": "2026-10-14",
+  "light": {
+    "--color-gray-800": "#262626",
+    "--crowdin-body-color": "var(--crowdin-gray-087)",
+    "--crowdin-border-color": "var(--crowdin-gray-012)",
+    "--crowdin-danger": "#dc5242",
+    "--crowdin-gray-005": "rgba(38, 38, 38, 0.05)",
+    "--crowdin-gray-01": "rgba(38, 38, 38, 0.1)",
+    "--crowdin-gray-012": "rgba(38, 38, 38, 0.12)",
+    "--crowdin-gray-087": "rgba(38, 38, 38, 0.87)",
+    "--crowdin-level-0-bg": "#eeeeee",
+    "--crowdin-level-2-bg": "#ffffff",
+    "--crowdin-level-3-bg": "#ffffff",
+    "--crowdin-primary": "var(--color-gray-800)",
+    "--crowdin-primary-foreground": "#ffffff",
+    "--crowdin-text-muted": "rgba(38, 38, 38, 0.67)"
+  },
+  "dark": {
+    "--color-gray-100": "#f4f4f4",
+    "--crowdin-body-color": "var(--crowdin-gray-087)",
+    "--crowdin-border-color": "var(--crowdin-gray-01)",
+    "--crowdin-danger": "#fd413c",
+    "--crowdin-gray-005": "rgba(244, 244, 244, 0.05)",
+    "--crowdin-gray-01": "rgba(244, 244, 244, 0.1)",
+    "--crowdin-gray-087": "rgba(244, 244, 244, 0.87)",
+    "--crowdin-level-0-bg": "#141414",
+    "--crowdin-level-2-bg": "#1c1c1c",
+    "--crowdin-level-3-bg": "#262626",
+    "--crowdin-primary": "var(--color-gray-100)",
+    "--crowdin-primary-foreground": "#262626",
+    "--crowdin-text-muted": "rgba(244, 244, 244, 0.54)"
+  }
+}
