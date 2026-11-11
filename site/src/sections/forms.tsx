@@ -1,3 +1,7 @@
+import { CalendarIcon } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/registry/new-york-v4/ui/button";
+import { Calendar } from "@/registry/new-york-v4/ui/calendar";
 import { Checkbox } from "@/registry/new-york-v4/ui/checkbox";
 import {
   Field,
@@ -7,6 +11,11 @@ import {
 } from "@/registry/new-york-v4/ui/field";
 import { Input } from "@/registry/new-york-v4/ui/input";
 import { Label } from "@/registry/new-york-v4/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/registry/new-york-v4/ui/popover";
 import {
   RadioGroup,
   RadioGroupItem,
@@ -24,6 +33,10 @@ import { Textarea } from "@/registry/new-york-v4/ui/textarea";
 import { Section } from "../section";
 
 export function Forms() {
+  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [dueDate, setDueDate] = useState<Date | undefined>();
+  const [dueDateOpen, setDueDateOpen] = useState(false);
+
   return (
     <Section title="Forms">
       <FieldGroup className="w-full max-w-sm">
@@ -75,10 +88,41 @@ export function Forms() {
           <Label htmlFor="qa-checks">QA checks</Label>
         </div>
         <div className="flex flex-col gap-2">
+          <Label htmlFor="due-date">Due date</Label>
+          <Popover open={dueDateOpen} onOpenChange={setDueDateOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                id="due-date"
+                variant="outline"
+                className="w-full justify-between font-normal"
+              >
+                {dueDate ? dueDate.toLocaleDateString() : "Select date"}
+                <CalendarIcon />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={dueDate}
+                onSelect={(day) => {
+                  setDueDate(day);
+                  setDueDateOpen(false);
+                }}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className="flex flex-col gap-2">
           <Label htmlFor="tm-threshold">TM match threshold</Label>
           <Slider id="tm-threshold" defaultValue={[75]} max={100} step={1} />
         </div>
       </div>
+      <Calendar
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        className="rounded-md border shadow-sm"
+      />
     </Section>
   );
 }

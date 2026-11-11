@@ -142,6 +142,24 @@
       ]
     },
     {
+      "name": "calendar",
+      "type": "registry:ui",
+      "dependencies": [
+        "react-day-picker@latest",
+        "date-fns"
+      ],
+      "registryDependencies": [
+        "@crowdin/button",
+        "@crowdin/theme"
+      ],
+      "files": [
+        {
+          "path": "src/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "card",
       "type": "registry:ui",
       "registryDependencies": [

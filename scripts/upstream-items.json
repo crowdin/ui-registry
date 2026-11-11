@@ -1,7 +1,7 @@
 {
   "items": [
     "accordion", "alert", "alert-dialog", "aspect-ratio", "avatar", "badge",
-    "breadcrumb", "button", "button-group", "card", "carousel", "chart",
+    "breadcrumb", "button", "button-group", "calendar", "card", "carousel", "chart",
     "checkbox", "collapsible", "combobox", "command", "context-menu", "dialog",
     "direction", "drawer", "dropdown-menu", "empty", "field", "form",
     "hover-card", "input", "input-group", "input-otp", "item", "kbd", "label",

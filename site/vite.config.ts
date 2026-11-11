@@ -21,6 +21,7 @@ export default defineConfig({
       "lucide-react",
       "sonner",
       "next-themes",
+      "react-day-picker",
     ],
     alias: {
       "@/registry/new-york-v4/ui": r("../registry/src/ui"),
